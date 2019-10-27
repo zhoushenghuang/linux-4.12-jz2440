@@ -111,6 +111,28 @@ static struct platform_device smdk_led7 = {
 
 static struct mtd_partition smdk_default_nand_part[] = {
 	[0] = {
+		.name	= "bootloader",
+		.size	= SZ_256K,
+		.offset	= 0,
+	},
+	[1] = {
+		.name	= "params",
+		.offset = MTDPART_OFS_APPEND,
+		.size	= SZ_128K,
+	},
+	[2] = {
+		.name	= "kernel",
+		.offset = MTDPART_OFS_APPEND,
+		.size	= SZ_2M,
+	},
+	[3] = {
+		.name	= "rootfs",
+		.offset	= MTDPART_OFS_APPEND,
+		.size	= MTDPART_SIZ_FULL,
+	}
+
+/*
+	[0] = {
 		.name	= "Boot Agent",
 		.size	= SZ_16K,
 		.offset	= 0,
@@ -150,6 +172,7 @@ static struct mtd_partition smdk_default_nand_part[] = {
 		.offset = SZ_1M * 48,
 		.size	= MTDPART_SIZ_FULL,
 	}
+*/
 };
 
 static struct s3c2410_nand_set smdk_nand_sets[] = {
